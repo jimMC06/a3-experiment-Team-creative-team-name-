@@ -1,9 +1,120 @@
 <!DOCTYPE html>
-<div id="container"></div>
-<script type="module">
+<html lang="en">
 
-import * as d3 from "https://cdn.jsdelivr.net/npm/d3@7/+esm";
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-console.log(d3);
+    <title>A3: Graph Perception Experiment</title>
 
-</script>
+    <link rel="stylesheet" href="style.css">
+    <script type="module" src="main.js"></script>
+</head>
+
+<body>
+    <!-- INTRODUCTION -->
+    <section id="intro-screen">
+        <div class="intro-content">
+            <h1>A3: Graph Perception Experiment</h1>
+            <p>
+                Welcome to our experiment and thank you for participating.
+                
+            </p>
+
+            <h2>How it works</h2>
+
+            <p>
+                You will see differnt types of graphs containing two marked values.
+            </p>
+            <p>
+                Your task will be to estimate what percentage the smalled marked value is of the larger marked value.
+            </p>
+
+            <p>
+                The full experiment consists of 60 trials, with 20 trials per visualization type.
+                It should take around 10-15 minutes, your answers will be recorded at the end!
+            </p>
+
+            <button id="start-button">Start Experiment</button>
+        </div>
+    </section>
+
+    <!-- EXPERIMENT -->
+    <section id="experiment-screen" hidden>
+
+        <!-- Top Header -->
+        <header class="experiment-header">
+            <h1>A3: Graph Perception Experiment</h1>
+
+            <div class="progress-container">
+                <div id="progress-fill"></div>
+            </div>
+
+            <span id="trial-counter">Trial 1 of 60</span>
+        </header>
+
+        <div class="experiment-layout">
+
+            <!-- Left Sidebar -->
+            <aside class="sidebar">
+
+                <div class="task-section">
+                    <h2>Task:</h2>
+
+                    <p id="question">
+                        What percentage is the smaller marked value of the larger marked value?
+                    </p>
+                </div>
+
+                <form id="response-form">
+                    <label for="answer-input">Answer:</label>
+                    <input
+                        id="answer-input"
+                        type="number"
+                        min="0"
+                        max="100"
+                        step="any"
+                        placeholder="0-100"
+                        required
+                    >
+
+                    <button type="submit" id="submit-button">
+                        Next
+                    </button>
+                </form>
+
+            </aside>
+
+            <!-- Right Chart Area -->
+            <div class="chart-area">
+                <div id="chart-container">
+                    <!-- D3 chart gets inserted here -->
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+
+    <!-- COMPLETION -->
+    <section id="complete-screen" hidden>
+        <div class="intro-content">
+            <h1>Thank You!</h1>
+
+            <p>
+                You have completed the experiment.
+                Thank you for participating!
+            </p>
+
+            <p>
+                Your Results have been collected/downloaded!
+            </p>
+            <!-- ADD user results here later -->
+
+            <button id="restart-button">Restart</button>
+        </div>
+    </section>
+
+</body>
+</html>
+

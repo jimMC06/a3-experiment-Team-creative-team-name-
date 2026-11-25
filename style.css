@@ -1,0 +1,173 @@
+
+*{
+    box-sizing: border-box;
+}
+
+[hidden]{
+    display: none !important;
+}
+
+body{
+    margin: 0;
+    font-family: Arial, sans-serif;
+    color: black;
+    background: white;
+}
+
+button{
+    padding: 12px 22px;
+    border: none;
+    border-radius: 6px;
+    background: lightskyblue;
+    color: white;
+    font-size: 16px;
+    cursor: pointer;
+}
+
+button:hover{
+    background: cornflowerblue;
+}
+
+
+
+
+/* Intro and completion screens */
+#intro-screen, #complete-screen{
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: white;
+    padding: 24px;
+}
+
+.intro-content{
+    max-width: 650px;
+    width: 100%;
+    background: white;
+    padding: 40px;
+    border-radius: 10px;
+    border: 1px solid white;
+}
+
+.intro-content h1{
+    margin-top: 0;
+}
+
+.intro-content p{
+    line-height: 1.6;
+}
+
+
+
+/* Experiment screens */
+.experiment-header{
+    height: 80px;
+    display: flex;
+    align-items: center;
+    gap: 30px;
+    padding: 0 25px;
+    border-bottom: 1px solid white;
+}
+
+.experiment-header h1{
+    font-size: 22px;
+    white-space: nowrap;
+}
+
+.progress-container{
+    flex: 1;
+    height: 14px;
+    background: whitesmoke;
+    border-radius: 20px;
+    overflow: hidden;
+}
+
+#progress-fill{
+    width: 0%;
+    height: 100%;
+    background: cornflowerblue;
+    transition: width 0.2s;
+}
+
+#trial-counter{
+    white-space: nowrap;
+    font-size: 14px;
+}
+
+/* Eexperiment layout */
+
+.experiment-layout{
+    display: grid;
+    grid-template-columns: 370px minmax(0, 1fr);
+    min-height: calc(100vh - 80px);
+}
+
+/* Left sidebar */
+.sidebar{
+    background: whitesmoke;
+    border-right: 1px solid #ddd;
+}
+
+.task-section{
+    padding: 25px;
+    background: lightgray;
+}
+
+.task-section h2{
+    margin-top: 0;
+    color: black;
+    font-size: 20px;
+}
+
+.task-section p{
+    line-height: 1.6;
+    font-size: 18px;
+}
+
+#response-form{
+    padding: 25px;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+#response-form label{
+    font-weight: bold;
+    font-size: 18px;
+}
+
+#answer-input{
+    width: 180px;
+    padding: 12px;
+    font-size: 16px;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+}
+
+#submit-button{
+    align-self: flex-end;
+    margin-top: 10px;
+}
+
+/* Visualization chart area */
+
+.chart-area{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 30px;
+    min-width: 0;
+}
+
+#chart-container{
+    width: 100%;
+    min-height: 450px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+#chart-container svg{ /* Currently takes svgs, remove if we do something elsee */
+    max-width: 100%;
+}
