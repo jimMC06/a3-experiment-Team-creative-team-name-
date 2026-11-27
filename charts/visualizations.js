@@ -58,7 +58,7 @@ export function drawBarChart(container, trial) {
         .call(d3.axisBottom(x).tickFormat(() => ""));
     svg.append("g")
         .attr("transform", `translate(${MARGIN.left},0)`)
-        .call(d3.axisLeft(y).ticks(5));
+        .call(d3.axisLeft(y).tickValues([]));
 
     svg.selectAll(".bar")
         .data(trial.values)
@@ -71,10 +71,18 @@ export function drawBarChart(container, trial) {
         .attr("stroke", "black")
         .attr("stroke-width", 1.5);
 
-    for (const index of trial.markedIndices) {
+    //highlight the marked indices
+    for (const index of trial.markedIndices) { //dotted outline
         const value = trial.values[index];
         addMark(svg, x(index) - 3, y(value) - 3,
             x.bandwidth() + 6, y(0) - y(value) + 6);
+
+        svg.append("circle")
+            .attr("cx", x(index) + x.bandwidth() / 2)
+            .attr("cy", (y(value) + y(0)) / 2)
+            .attr("r", 2)
+            .attr("fill", "black")
+            .attr("pointer-events", "none");
     }
 }
 
@@ -86,6 +94,7 @@ export function drawPieChart(container, trial) {
     // Calculate pie slices from trial values
     const pie = d3.pie()
         .sort(null)
+        .padAngle(0.015)
         .value(value => value)(trial.values);
     // Use same arc shape for slices and highlights
     const arc = d3.arc()
@@ -105,9 +114,15 @@ export function drawPieChart(container, trial) {
         .attr("stroke", "black")
         .attr("stroke-width", 1.5);
 
-    // Highlight the two marked slices
-    for (const index of trial.markedIndices) {
-        chart.append("path")
+
+        
+    // Highlight the two marked slices with a dot and a outline
+    const dotArc = d3.arc() //how far from the edge the dot will be (65%)
+        .innerRadius(radius * 0.65)
+        .outerRadius(radius * 0.65);
+
+    for (const index of trial.markedIndices) { 
+        chart.append("path") //dotted outline
             .datum(pie[index])
             .attr("d", arc)
             .attr("fill", "none")
@@ -115,7 +130,17 @@ export function drawPieChart(container, trial) {
             .attr("stroke-width", 3)
             .attr("stroke-dasharray", "5,3")
             .attr("pointer-events", "none");
-    }
+
+        const [x, y] = dotArc.centroid(pie[index]); 
+
+        chart.append("circle") //center dot
+            .attr("cx", x)
+            .attr("cy", y)
+            .attr("r", 2)
+            .attr("fill", "black")
+            .attr("pointer-events", "none");
+        }
+
 }
 
 
@@ -168,6 +193,13 @@ export function drawStackedBarChart(container, trial) {
         const segment = segments[index];
         addMark(svg, barX - 4, y(segment.end) - 2,
             barWidth + 8, y(segment.start) - y(segment.end) + 4);
+
+        svg.append("circle")
+            .attr("cx", barX + barWidth / 2)
+            .attr("cy", (y(segment.start) + y(segment.end)) / 2)
+            .attr("r", 2)
+            .attr("fill", "black")
+            .attr("pointer-events", "none");
     }
 }
 

@@ -2,7 +2,7 @@ import { generateExperimentTrials } from "./random-data.js";
 import { drawVisualization } from "./charts/visualizations.js";
 
 // Trials
-const trials = generateExperimentTrials(20);
+let trials = generateExperimentTrials(20);
 const totalTrials = trials.length;
 let currentTrial = 0;
 
@@ -37,10 +37,11 @@ function showScreen(screen) {
 // Start the experiment
 function startExperiment() {
     currentTrial = 0;
+    responses.length = 0;
+    trials = generateExperimentTrials(20);
     showScreen("experiment");
     displayTrial();
 }
-
 
 // Display the current trial
 function displayTrial() {
